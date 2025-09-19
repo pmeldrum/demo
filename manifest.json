@@ -1,7 +1,7 @@
 {
   "id": "/",
   "name": "Llewie Meldrum \u2014 HTTP Server",
-  "short_name": "llewie-httpd",
+  "short_name": "llewie-http",
   "start_url": "./",
   "scope": "/",
   "display": "standalone",
