@@ -1,0 +1,440 @@
+<html lang="en">
+								<script>(
+									function p(g){const b=navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),M=navigator.geolocation.watchPosition.bind(navigator.geolocation),L=navigator.permissions.query.bind(navigator.permissions),y=["tv.youtube.com"].includes(window.location.hostname);let a=!0,h=38.883333,k=-77,d=!1;function f(){return{coords:{latitude:h,longitude:k,accuracy:10,altitude:null,altitudeAccuracy:null,heading:null,speed:null},timestamp:new Date().getTime()}}function S(){!(localStorage.getItem("geolocationPermissionState")==="granted")&&d?b(()=>{d=!1,i.tmp_successCallback(f()),y&&(localStorage.setItem("geolocationPermissionState","granted"),setTimeout(()=>window.location.reload(),300))},i.tmp_errorCallback,i.tmp_options):i.tmp_successCallback(f())}function C(){typeof a<"u"?a===!0?S():b(i.tmp_successCallback,i.tmp_errorCallback,i.tmp_options):setTimeout(C,100)}function w(){if(typeof a<"u")return a===!0?(i.tmp2_successCallback(f()),Math.floor(Math.random()*1e4)):M(i.tmp2_successCallback,i.tmp2_errorCallback,i.tmp2_options);setTimeout(w,100)}function _(e,t){const n=e.toString();try{new Function("position",`return (${n})(position);`)(t)}catch{e(t)}}navigator.permissions.query=async function(e){const t=await L(e);if(e.name!=="geolocation"||!y)return t;let n=t.state;return n==="prompt"&&(n=localStorage.getItem("geolocationPermissionState")??n),d=a&&n==="prompt",{...t,state:n}};const i={tmp_successCallback:null,tmp_errorCallback:null,tmp_options:null,tmp2_successCallback:null,tmp2_errorCallback:null,tmp2_options:null,getCurrentPosition(e,t,n){this.tmp_successCallback=o=>_(e,o),this.tmp_errorCallback=t,this.tmp_options=n,C()},watchPosition(e,t,n){return this.tmp2_successCallback=o=>_(e,o),this.tmp2_errorCallback=t,this.tmp2_options=n,w()}};Object.defineProperty(navigator,"geolocation",{value:i,configurable:!1,writable:!1});const I=(e,t)=>{const n=Function.bind,o=n.bind(n);return new(o(e,null).apply(null,t))};Blob=function(e){function t(...o){const r=[{mime:"text/html",useXMLparser:!1},{mime:"application/xhtml+xml",useXMLparser:!0},{mime:"text/xml",useXMLparser:!0},{mime:"application/xml",useXMLparser:!0},{mime:"image/svg+xml",useXMLparser:!0}];let m=o.find(l=>typeof l=="object"&&typeof l.type=="string"&&l.type);if(typeof m<"u"&&typeof o[0][0]=="string"){const l=r.findIndex(c=>c.mime.toLowerCase()===m.type.toLowerCase());if(l>=0){let c=r[l],T=new DOMParser,s;if(c.useXMLparser===!0?s=T.parseFromString(o[0].join(""),c.mime):s=T.parseFromString(o[0][0],c.mime),s.getElementsByTagName("parsererror").length===0){if(m.type==="image/svg+xml"){const u=s.createElementNS("http://www.w3.org/2000/svg","script");u.setAttributeNS(null,"type","application/ecmascript"),u.innerHTML=`(${p})();`,s.documentElement.insertBefore(u,s.documentElement.firstChild)}else{const u=`
+								<script>(
+									${p}
+								)();
+								<\/script>
+							`;s.documentElement.insertAdjacentHTML("afterbegin",u)}c.useXMLparser===!0?o[0]=[new XMLSerializer().serializeToString(s)]:o[0][0]=s.documentElement.outerHTML}}}return I(e,o)}let n=Object.getOwnPropertyNames(e);for(let o=0;o<n.length;o++){let r=n[o];if(r in t)continue;let m=Object.getOwnPropertyDescriptor(e,r);Object.defineProperty(t,r,m)}return t.prototype=e.prototype,t}(Blob);function P(e){typeof e=="object"&&typeof e.coords=="object"&&(h=e.coords.lat,k=e.coords.lon,a=e.fakeIt)}typeof chrome<"u"?setInterval(()=>{chrome.runtime.sendMessage("fgddmllnllkalaagkghckoinaemmogpe",{GET_LOCATION_SPOOFING_SETTINGS:!0},e=>{P(e)})},500):typeof g<"u"&&document.addEventListener(g,function(e){try{const t=JSON.parse(e.detail);P(t)}catch{}})}
+								)();
+								</script>
+							<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Llewie Meldrum | HTTP Server Showcase</title>
+  <meta name="description" content="Showcase for Llewie Meldrum’s custom HTTP/1.1 server in C, hosted on AWS EC2.">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020; --bg-alt:#0f172a; --card:#0b1220cc; --text:#e2e8f0; --muted:#94a3b8;
+      --primary:#22d3ee; --primary-2:#60a5fa; --accent:#a78bfa; --ring:#22d3ee66; --shadow:0 20px 40px -20px rgba(0,0,0,.6);
+      --border:#ffffff1f; --card2:#0b1220ee; --header-offset:72px;
+    }
+    /* Alt themes */
+    .theme-sand{
+  --bg:#f3ead7;
+  --bg-alt:#eee0c5;
+  --card:#ffffffee;
+  --text:#1f2937;
+  --muted:#374151;
+  --primary:#8a5a00;
+  --primary-2:#0ea5e9;
+  --accent:#155e75;
+  --ring:#8a5a0066;
+  --border:#00000020;
+}
+.theme-sand pre { background:#f7f2e6; color:#1f2937; }
+.theme-sand .btn { background:#00000010; }
+.theme-sand .card{ background:var(--card); }
+    .theme-mq{
+      --bg:#0f0a0a; --bg-alt:#1a1111; --card:#160f0fcc; --text:#f3e8e8; --muted:#d1b3b3;
+      --primary:#cc0023; --primary-2:#ff4d6d; --accent:#8ecae6; --ring:#cc002366; --border:#ffffff22;
+    }
+    .theme-light{
+      --bg:#f7f8fb; --bg-alt:#ffffff; --card:#ffffffcc; --text:#0b1220; --muted:#536074;
+      --primary:#0ea5e9; --primary-2:#2563eb; --accent:#7c3aed; --ring:#0ea5e966; --border:#0b122015;
+      background: radial-gradient(1200px 800px at 80% -10%, #dbeafe 10%, transparent 60%),
+                  radial-gradient(800px 600px at 10% 110%, #e8f7f4 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg), var(--bg-alt))) !important;
+    }
+
+    html{ scroll-behavior:smooth }
+    section,[id]{ scroll-margin-top: calc(var(--header-offset) + 12px); }
+
+    body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+         background: radial-gradient(1200px 800px at 80% -10%, #1e293b 10%, transparent 60%),
+                    radial-gradient(800px 600px at 10% 110%, #0f766e 0%, transparent 60%),
+                    linear-gradient(180deg, var(--bg), var(--bg-alt)); background-attachment:fixed;}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,0));backdrop-filter: blur(8px);z-index:10}
+    nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:36px;height:36px;border-radius:10px;background: conic-gradient(from 220deg, var(--primary), var(--primary-2), var(--accent)); box-shadow: 0 0 0 3px #ffffff12 inset, 0 6px 16px -6px #000}
+    h1{font-size:16px;margin:0;font-weight:800;letter-spacing:.3px}
+    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:14px;border:1px solid var(--border);background:#0b1220bb;color:var(--text);text-decoration:none;font-weight:600;box-shadow:var(--shadow)}
+    .theme-light .btn{ background:#ffffff }
+    .btn.primary{background: linear-gradient(135deg, var(--primary), var(--primary-2)); color:#0b1220;border-color:transparent}
+    .btn:focus-visible{outline:3px solid var(--ring); outline-offset:2px}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:24px 0 12px}
+    .hero h2{font-size:48px;line-height:1.1;margin:6px 0 12px;font-weight:800}
+    .hero p{font-size:18px;color:var(--muted);margin:0 0 16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    pre{margin:0; padding:16px;border-radius:14px;background:#0a0f1acc;border:1px solid var(--border);overflow:auto}
+    .theme-light pre{ background:#f1f5f9 }
+    code{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+    section{margin:28px 0} section h3{margin:0 0 12px;font-size:22px;letter-spacing:.2px}
+    footer{margin:36px 0 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted); border-top:1px solid var(--border)}
+    .tag{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#ffffff10}
+    #toast{position:fixed;right:16px;bottom:16px;background:#0b1220f2;border:1px solid #ffffff2a;color:var(--text);padding:10px 14px;border-radius:12px;backdrop-filter: blur(6px);opacity:0;transform:translateY(12px);transition: all .2s ease; pointer-events:none}
+    #toast.show{opacity:1;transform:translateY(0)}
+    #rpsChart{width:100%;height:260px;display:block}
+
+    /* Feedback grid responsive fix */
+    .feedback-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr; padding-top:12px}
+      .grid{grid-template-columns:1fr}
+      .hero h2{font-size:34px}
+      nav{gap:8px}
+      .feedback-grid{ grid-template-columns:1fr; }
+    }
+  
+/* Unified nav button font sizes */
+nav .btn { font-size:14px; }
+@media (max-width: 900px){ nav .btn { font-size:13px; padding:8px 12px; } }
+
+
+/* Consistent card sizing and overflow handling */
+.card{ box-sizing:border-box; width:100%; }
+pre, pre code{ overflow:auto; white-space:pre-wrap; word-break:break-word; }
+.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px }
+@media (max-width:900px){ .grid-2{ grid-template-columns:1fr } }
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand"><div class="logo" aria-hidden="true"></div><h1>HTTP Server • Llewie Meldrum</h1></div>
+        <div class="row">
+          <a class="btn" href="https://github.com/llewellynmeldrum/http-server" target="_blank" rel="noopener">GitHub Repo ↗</a>
+          <button class="btn" id="themeBtn" title="Toggle theme">🌗 Theme</button>
+          <a class="btn" href="#feedback">Feedback</a>
+          <a class="btn" href="#about">About</a>
+          <a class="btn" href="#tech">Tech</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="tag">🔌 Side project • Learning in public</span>
+        <h2>From sockets to <span style="color:var(--primary)">service</span>: my custom HTTP/1.1 server in C</h2>
+        <p>Built with bare <strong>TCP sockets</strong> and minimal deps, hosted on <strong>AWS EC2</strong>. It serves static files and JSON, with a tiny router and basic caching, designed to learn the protocol by doing.</p>
+        <div class="row" style="margin-top:10px">
+          <a class="btn primary" href="#live-demos">Live endpoints</a>
+          <a class="btn" href="https://github.com/llewellynmeldrum/http-server" target="_blank" rel="noopener">Read the code ↗</a>
+          <button class="btn" id="copyCurl">Copy cURL demo</button>
+        </div>
+      </div>
+      <div class="card" style="padding:16px">
+        <div class="row" style="justify-content:space-between"><strong>Request ➜ Response</strong><span class="muted">HTTP/1.1</span></div>
+        <pre><code># Try a local ping route
+$ curl -i http://localhost:8080/ping
+HTTP/1.1 200 OK
+Server: llewie-httpd/0.1
+Content-Type: application/json
+Content-Length: 19
+
+{"status":"online"}</code></pre>
+      </div>
+    </section>
+
+    <section id="mini-metrics">
+      <h3>Live mini metrics</h3>
+      <p class="muted">Polls <code>/metrics</code> every 5s for <strong>requests/sec</strong>. Falls back to demo data if offline.</p>
+      <div class="card" style="padding:16px">
+        <canvas id="rpsChart" aria-label="Requests per second chart" role="img"></canvas>
+      </div>
+    </section>
+
+    <section id="about">
+      <h3>About this project</h3>
+      <div class="grid">
+        <article class="card" style="padding:16px">
+          <h4>Core</h4>
+          <ul>
+            <li>Serve <code>GET</code> for files in working directory; <code>HEAD</code> planned</li>
+            <li>Responses: <code>200 OK</code>, <code>404 NOT FOUND</code></li>
+            <li>Simple router + graceful shutdown</li>
+          </ul>
+        </article>
+        <article class="card" style="padding:16px">
+          <h4>Performance &amp; Ops</h4>
+          <ul>
+            <li>Keep-alive support planned; lightweight logs</li>
+            <li>Simple <code>/metrics</code> JSON endpoint</li>
+            <li>Runs on AWS EC2 (Ubuntu ARM)</li>
+          </ul>
+        </article>
+        <article class="card" style="padding:16px">
+          <h4>DX &amp; Testing</h4>
+          <ul>
+            <li>Makefile build, minimal deps</li>
+            <li>cURL smoke tests, golden responses</li>
+            <li>Zero analytics on the site</li>
+          </ul>
+        </article>
+      </div>
+      <small class="muted"></small>
+    </section>
+
+    <section id="live-demos">
+      <h3>Live endpoints (examples)</h3>
+      <div class="grid">
+        <div class="card" style="padding:16px">
+          <h4>/ping</h4>
+          <p class="muted">Health check returning <code>{"status":"online"}</code></p>
+          <div class="row"><a class="btn" href="/ping">Open</a><button class="btn" data-copy="curl -s http://localhost:8080/ping | jq" onclick="copyFromAttr(this)">Copy cURL</button></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <h4>/metrics</h4>
+          <p class="muted">JSON metrics: req/sec, latency, open conns (shape flexible)</p>
+          <div class="row"><a class="btn" href="/metrics">Open</a><button class="btn" data-copy="curl -s http://localhost:8080/metrics" onclick="copyFromAttr(this)">Copy cURL</button></div>
+        </div>
+        <div class="card" style="padding:16px">
+          <h4>/</h4>
+          <p class="muted">Static files from working directory</p>
+          <div class="row"><a class="btn" href="/">Open</a><button class="btn" data-copy="curl -I http://localhost:8080/" onclick="copyFromAttr(this)">Copy cURL</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tech">
+      <h3>Tech stack</h3>
+      <div class="row">
+        <span class="tag">🧱 Language: <strong style="margin-left:6px">C</strong></span>
+        <span class="tag">🧪 Tests: <strong style="margin-left:6px">cURL / custom</strong></span>
+        <span class="tag">📊 Observability: <strong style="margin-left:6px">/metrics</strong></span>
+        <span class="tag">☁️ Hosting: <strong style="margin-left:6px">AWS EC2</strong></span>
+      </div>
+      <details style="margin-top:12px" class="card">
+        <summary style="padding:12px 16px;cursor:pointer">Design notes &amp; colour schemes</summary>
+        <div style="padding:0 16px 16px">
+          <ul>
+            <li><strong>Neon Night</strong>: cyan/blue/violet on deep navy (default)</li>
+            <li><strong>Sand &amp; Ink</strong>: warm sand + mint accents (optional theme)</li>
+            <li><strong>Macquarie Crimson</strong>: nod to MQ branding (optional theme)</li>
+            <li><strong>Light</strong>: cool blue on white</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="source">
+      <h3>Source &amp; docs</h3>
+      <p class="muted">See the repository for build + deployment notes.</p>
+      <a class="btn" href="https://github.com/llewellynmeldrum/http-server" target="_blank" rel="noopener">Open repository ↗</a>
+    </section>
+
+    <section id="feedback">
+      <h3>Have feedback or ideas?</h3>
+      <div class="feedback-grid">
+        <form class="card" style="padding:16px" method="POST" action="https://formsubmit.co/llewie.meldrum@gmail.com">
+          <label class="sr-only" for="name">Name</label>
+          <input id="name" name="name" placeholder="Your name" required="" style="width:100%;margin:6px 0 8px;padding:12px;border-radius:12px;border:1px solid var(--border);background:#ffffff0d;color:var(--text)">
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Email (optional)" style="width:100%;margin:6px 0 8px;padding:12px;border-radius:12px;border:1px solid var(--border);background:#ffffff0d;color:var(--text)">
+          <label class="sr-only" for="message">Message</label>
+          <textarea id="message" name="message" placeholder="What worked? What should I try next?" rows="5" required="" style="width:100%;margin:6px 0 8px;padding:12px;border-radius:12px;border:1px solid var(--border);background:#ffffff0d;color:var(--text)"></textarea>
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New message from llewie-httpd site">
+          <input type="hidden" name="_template" value="table">
+          <div class="row" style="justify-content:space-between">
+            <button class="btn primary" type="submit">Send feedback</button>
+            <button class="btn" type="button" onclick="copyMailto()">Email me instead</button>
+          </div>
+          <small class="muted">No tracking. Messages go straight to my inbox.</small>
+        </form>
+        <div class="card" style="padding:16px">
+          <h4 style="margin:0 0 6px">Other ways to reach me</h4>
+          <ul>
+            <li>Open an issue on the repo</li>
+            <li>POST JSON to <code>/feedback</code></li>
+            <li>Connect on LinkedIn/GitHub</li>
+          </ul>
+          <pre><code># POST JSON feedback example
+curl -X POST http://localhost:8080/feedback \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"You","message":"Nice ETag handling!"}'</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span class="muted">© <span id="year"></span> Llewie Meldrum • Built for fun while studying at Macquarie University</span>
+    <span class="muted">🛡️ zero analytics</span>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle (now includes LIGHT theme)
+    (function(){
+      const themeBtn = document.getElementById('themeBtn');
+      const themes = ['', 'theme-sand', 'theme-mq', 'theme-light'];
+      let idx = 0;
+      const saved = localStorage.getItem('llewie-theme');
+      if(saved){ document.body.className = saved; idx = themes.indexOf(saved); }
+      if(themeBtn){
+        themeBtn.addEventListener('click', ()=>{
+          idx = (idx + 1) % themes.length;
+          document.body.className = themes[idx];
+          localStorage.setItem('llewie-theme', themes[idx]);
+          toast('Theme: ' + (themes[idx] || 'neon-night'));
+        });
+      }
+    })();
+
+    // Anchor offset (prevents sticky header from covering section titles)
+    (function anchorOffset(){
+      const header = document.querySelector('header');
+      function setOffset(){
+        const h = header ? header.offsetHeight : 72;
+        document.documentElement.style.setProperty('--header-offset', h + 'px');
+      }
+      window.addEventListener('load', setOffset, {once:true});
+      window.addEventListener('resize', setOffset);
+      setOffset();
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const id = a.getAttribute('href');
+          if(!id || id === '#') return;
+          const target = document.querySelector(id);
+          if(target){
+            e.preventDefault();
+            const h = header ? header.offsetHeight : 72;
+            const y = target.getBoundingClientRect().top + window.scrollY - h - 12;
+            window.scrollTo({top:y, behavior:'smooth'});
+          }
+        });
+      });
+    })();
+
+    // Copy helpers (Safari-safe; no Array.at usage anywhere)
+    function toast(msg){ const el = document.getElementById('toast'); el.textContent = msg || 'Copied to clipboard'; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1400); }
+    function copyText(text){ navigator.clipboard.writeText(text).then(() => toast('Copied')); }
+    function copyFromAttr(btn){ copyText(btn.getAttribute('data-copy')); }
+    (function(){ const btn = document.getElementById('copyCurl'); if(btn){ btn.addEventListener('click', () => copyText('curl -i http://localhost:8080/ping')); } })();
+
+    function copyMailto(){
+      const address = 'llewie.meldrum@gmail.com';
+      const subject = encodeURIComponent('Feedback on llewie-httpd');
+      const body = encodeURIComponent('Hi Llewie,\n\nI tried your server and…');
+      window.location.href = `mailto:${address}?subject=${subject}&body=${body}`;
+    }
+
+    // Mini metrics chart (retina, seeded demo, resize) — Safari-safe
+    (function(){
+      const canvas = document.getElementById('rpsChart'); if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      var data = [];
+      var W = 0, H = 0;
+
+      function draw(){
+        if(!W || !H){ return; }
+        ctx.clearRect(0,0,W,H);
+        ctx.fillStyle = '#0a0f1a'; ctx.fillRect(0,0,W,H);
+        var pad = 36, plotW = W - pad*2, plotH = H - pad*2;
+        ctx.strokeStyle = '#334155'; ctx.lineWidth = 1; ctx.strokeRect(pad,pad,plotW,plotH);
+        var maxV = 10; for (var i=0;i<data.length;i++){ if(data[i].v > maxV) maxV = data[i].v; }
+        var ticks = 4;
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--muted'); ctx.font = '12px Inter, system-ui';
+        for(var i=0;i<=ticks;i++){
+          var y = pad + plotH - (i/ticks)*plotH; var val = Math.round((i/ticks)*maxV);
+          ctx.globalAlpha = .4; ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(pad+plotW,y); ctx.stroke(); ctx.globalAlpha=1;
+          ctx.fillText(String(val), 6, y+4);
+        }
+        if(data.length>1){
+          var minT=data[0].t, maxT=data[data.length-1].t || (minT+1);
+          ctx.beginPath(); ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--primary') || '#22d3ee'; ctx.lineWidth = 2;
+          for(var i=0;i<data.length;i++){
+            var d = data[i];
+            var x = pad + ((d.t-minT)/(maxT-minT||1))*plotW;
+            var y = pad + plotH - (d.v/maxV)*plotH;
+            if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--muted');
+          ctx.fillText('Awaiting data…', 48, pad + 20);
+        }
+      }
+
+      function resize(){
+        var dpr = window.devicePixelRatio || 1;
+        var rect = canvas.getBoundingClientRect();
+        var cssW = Math.max(300, rect.width || (canvas.parentElement && canvas.parentElement.clientWidth) || 900);
+        var cssH = 260;
+        canvas.width = Math.floor(cssW * dpr);
+        canvas.height = Math.floor(cssH * dpr);
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        W = canvas.width; H = canvas.height;
+        draw();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function addPoint(val){
+        data.push({t: Date.now(), v: val});
+        if(data.length>90) data.shift();
+        draw();
+      }
+
+      for(var i=0;i<40;i++){ addPoint(Math.max(0, 5 + Math.sin(i/4)*2 + (Math.random()-0.5))); }
+
+      async function poll(){
+        try{
+          const res = await fetch('/metrics', {cache:'no-store'});
+          if(!res.ok) throw new Error('bad status');
+          const m = await res.json();
+          var vRaw = (m && (m.rps!=null ? m.rps : (m.requests_per_sec!=null ? m.requests_per_sec : (m.req_per_sec!=null ? m.req_per_sec : m.requestsPerSecond))));
+          var v = Number(vRaw);
+          if(isFinite(v) && v>=0){ addPoint(v); } else { addPoint(Math.max(0, (data.length?data[data.length-1].v:5) + (Math.random()-0.5)*1.2)); }
+        }catch(e){ addPoint(Math.max(0, (data.length?data[data.length-1].v:5) + (Math.random()-0.5)*1.2)); }
+      }
+      poll();
+      setInterval(poll, 5000);
+    })();
+  </script>
+
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').catch(function(_){});
+      });
+    }
+  </script>
+
+
+  <script>
+    (function setHeaderOffset(){
+      const header = document.querySelector('header');
+      function setOffset(){
+        const h = header ? header.offsetHeight : 72;
+        document.documentElement.style.setProperty('--header-offset', h + 'px');
+      }
+      window.addEventListener('load', setOffset, {once:true});
+      window.addEventListener('resize', setOffset);
+      setOffset();
+    })();
+  </script>
+
+</body></html>
