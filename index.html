@@ -98,18 +98,25 @@
       .feedback-grid{ grid-template-columns:1fr; }
     }
   
-/* Unified nav button font sizes */
-nav .btn { font-size:14px; }
-@media (max-width: 900px){ nav .btn { font-size:13px; padding:8px 12px; } }
-
-
-/* Consistent card sizing and overflow handling */
-.card{ box-sizing:border-box; width:100%; }
-pre, pre code{ overflow:auto; white-space:pre-wrap; word-break:break-word; }
-.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px }
-@media (max-width:900px){ .grid-2{ grid-template-columns:1fr } }
+/* Consistent buttons */
+.btn{ font-size:14px; padding:10px 14px; }
+nav .btn{ font-size:14px; }
+@media (max-width: 900px){
+  .btn, nav .btn{ font-size:13px; padding:8px 12px; }
+}
 
 </style>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="/apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Llewie Meldrum">
+  <meta name="theme-color" content="#0ea5e9">
+
 </head>
 <body>
   <header>
@@ -123,7 +130,8 @@ pre, pre code{ overflow:auto; white-space:pre-wrap; word-break:break-word; }
           <a class="btn" href="#about">About</a>
           <a class="btn" href="#tech">Tech</a>
         </div>
-      </nav>
+        <button class="btn" id="installAppBtn" style="display:none">Install app</button>
+</nav>
     </div>
   </header>
 
@@ -411,6 +419,26 @@ curl -X POST http://localhost:8080/feedback \
       }
       poll();
       setInterval(poll, 5000);
+    })();
+  </script>
+
+
+  <script>
+    (function(){
+      let deferredPrompt = null;
+      const btn = document.getElementById('installAppBtn');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if(btn) btn.style.display = 'inline-flex';
+      });
+      btn?.addEventListener('click', async () => {
+        if(!deferredPrompt) return alert('Install not available yet. Try from Chrome menu.');
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        btn.style.display = 'none';
+      });
     })();
   </script>
 

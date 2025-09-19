@@ -1,7 +1,9 @@
 {
+  "id": "/",
   "name": "Llewie Meldrum \u2014 HTTP Server",
-  "short_name": "llewie-http",
-  "start_url": "/",
+  "short_name": "llewie-httpd",
+  "start_url": "./",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0b1020",
   "theme_color": "#0ea5e9",
@@ -17,11 +19,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
     }
   ]
 }
