@@ -105,6 +105,15 @@ nav .btn{ font-size:14px; }
   .btn, nav .btn{ font-size:13px; padding:8px 12px; }
 }
 
+
+/* Layout safety & mobile overflow fixes */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+.container { overflow-x: hidden; }
+img, canvas, svg, video { max-width: 100%; height: auto; }
+input, textarea, select, button { max-width: 100%; }
+pre, pre code { white-space: pre-wrap; word-break: break-word; overflow: auto; }
+
 </style>
 
   <link rel="manifest" href="/manifest.json">
@@ -265,7 +274,7 @@ Content-Length: 19
             <button class="btn primary" type="submit">Send feedback</button>
             <button class="btn" type="button" onclick="copyMailto()">Email me instead</button>
           </div>
-          <small class="muted">No tracking. Messages go straight to my inbox.</small>
+          <small class="muted"></small>
         </form>
         <div class="card" style="padding:16px">
           <h4 style="margin:0 0 6px">Other ways to reach me</h4>
@@ -298,7 +307,7 @@ curl -X POST http://localhost:8080/feedback \
       const themeBtn = document.getElementById('themeBtn');
       const themes = ['', 'theme-sand', 'theme-mq', 'theme-light'];
       let idx = 0;
-      const saved = localStorage.getItem('llewie-theme');
+      const saved = localStorage.getItem('llewie-theme') || 'theme-sand';
       if(saved){ document.body.className = saved; idx = themes.indexOf(saved); }
       if(themeBtn){
         themeBtn.addEventListener('click', ()=>{
